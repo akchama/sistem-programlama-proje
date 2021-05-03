@@ -8,3 +8,5 @@ Merve Yılmaz -  b171210054
 
 DERLEME SÜRECİ:
 Proje dizinine gelip "make" komutunu çalıştırın.
+
+ilerleme raporu
