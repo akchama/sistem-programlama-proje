@@ -4,20 +4,37 @@
 #include "fields.h"
 #include <cJSON.h>
 
+void encrypt(IS is_input);
+void decrypt();
+
 int main(int argc, char **argv)
 {
-  IS is;
-  int i, j;
+  IS is_input;
+  is_input = new_inputstruct("data/istiklal_marsi/istiklal_marsi.txt");
+
+  encrypt(is_input);
+  decrypt();
+
+  return 0;
+}
+
+void decrypt() 
+{
+  FILE *f = fopen ("data/istiklal_marsi/decrypted_test.txt", "w+");
+}
+
+void encrypt(IS is_input)
+{
   FILE *fp;
-  cJSON *name = NULL;
+  int i, j;
   char *buffer = 0;
   long length;
-  cJSON *json;
   FILE *f = fopen ("data/istiklal_marsi/.kilit", "rb");
-  is = new_inputstruct("data/istiklal_marsi/istiklal_marsi.txt");
+  cJSON *json;
+  cJSON *name = NULL;
 
-  if (is == NULL) {
-    perror(argv[1]);
+  if (is_input == NULL) {
+    perror("Hata: ");
     exit(1);
   }
 
@@ -40,17 +57,17 @@ int main(int argc, char **argv)
   if (buffer)
   {
     json = cJSON_Parse(buffer);
-    while(get_line(is) >= 0) {
-      for (i = 0; i < is->NF; i++) {
-        name = cJSON_GetObjectItemCaseSensitive(json, is->fields[i]);
+    while(get_line(is_input) >= 0) {
+      for (i = 0; i < is_input->NF; i++) {
+        name = cJSON_GetObjectItemCaseSensitive(json, is_input->fields[i]);
         fprintf(fp, "%s ", name->valuestring);
-        // printf("%d: %s: ", is->line, is->fields[i]);
+        // printf("%d: %s: ", is_input->line, is_input->fields[i]);
         // printf("%s\n", name->valuestring);
       }
     }
   }
 
-  jettison_inputstruct(is);
+  jettison_inputstruct(is_input);
   fclose(fp);
-  return 0;
+  return;
 }
