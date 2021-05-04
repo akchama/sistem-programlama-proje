@@ -19,52 +19,72 @@ int main(int argc, char **argv)
 
 void decrypt()
 {
-    FILE* fp;
-    int i, j;
-    char* buffer = 0;
-    char* str = 0;
-    long length;
-    FILE* f = fopen("data/istiklal_marsi/.kilit", "rb");
-    cJSON* json;
-    JRB b, tmp;
-    b = make_jrb();
-    tmp = make_jrb();
+  IS is_input;
+  FILE *fp;
+  int i, j;
+  char *buffer = 0;
+  char *str = 0;
+  long length;
+  FILE *f = fopen ("data/istiklal_marsi/.kilit", "rb");
+  cJSON *json;
+  JRB b, tmp;
+  b = make_jrb();
+  tmp = make_jrb();
+  is_input = new_inputstruct("data/istiklal_marsi/encrypted_test");
 
-    fp = fopen("data/istiklal_marsi/decrypted_test.txt", "w+");
-    if (fp < 0) { perror("Error: "); exit(1); }
+  if (is_input == NULL) {
+    perror("Hata: ");
+    exit(1);
+  }
 
-    if (f)
-    {
-        fseek(f, 0, SEEK_END);
-        length = ftell(f);
-        fseek(f, 0, SEEK_SET);
-        buffer = malloc(length);
-        if (buffer)
-        {
-            fread(buffer, 1, length, f);
-        }
-        fclose(f);
-    }
+  fp = fopen("data/istiklal_marsi/decrypted_test.txt", "w+");
+  if (fp < 0) { perror("Error: "); exit(1); }
 
+  if (f)
+  {
+    fseek (f, 0, SEEK_END);
+    length = ftell (f);
+    fseek (f, 0, SEEK_SET);
+    buffer = malloc (length);
     if (buffer)
     {
-        json = cJSON_Parse(buffer);
-        cJSON* current_element = NULL;
-        char* current_key = NULL;
+      fread (buffer, 1, length, f);
+    }
+    fclose (f);
+  }
 
-        cJSON_ArrayForEach(current_element, json)
+  if (buffer)
+  {
+    json = cJSON_Parse(buffer);
+    cJSON *current_element = NULL;
+    char *current_key = NULL;
+
+    cJSON_ArrayForEach(current_element, json)
+    {
+        current_key = current_element->string;
+        if (current_key != NULL)
         {
-            current_key = current_element->string;
-            if (current_key != NULL)
-            {
-                // printf("%s ", current_element->valuestring);
-                (void)jrb_insert_str(b, strdup(current_element->valuestring), new_jval_v(current_key));
-            }
+            // printf("%s ", current_element->valuestring);
+            (void) jrb_insert_str(b, strdup(current_element->valuestring), new_jval_v(current_key));
         }
     }
+    while(get_line(is_input) >= 0) {
+      for (i = 0; i < is_input->NF; i++) {
+        str = strdup(is_input->fields[i]);
 
-    fclose(fp);
-    return;
+
+        tmp = jrb_find_str(b, str); // This works but when I use "str" here instead of "10001011", I get a segmentation fault.
+        
+        
+        // printf("%s ", tmp->val.s);
+        fprintf(fp, "%s ", tmp->val.s);
+      }
+    }
+  }
+
+  jettison_inputstruct(is_input);
+  fclose(fp);
+  return;
 }
 
 void encrypt()
