@@ -1,6 +1,4 @@
-lib/*
 obj/*
 bin/*
-!lib/.keep
 !obj/.keep
 !bin/.keep
