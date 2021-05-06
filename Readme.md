@@ -1,12 +1,16 @@
-SİSTEM PROGRAMLAMA PROJE ÖDEVİ
+## SİSTEM PROGRAMLAMA PROJE ÖDEVİ
 
-GRUP ÜYELERİ:
+# GRUP ÜYELERİ:
 Abdullah Akçam - g140910076
 Büşra Kaynak - b171210030
-Cengizhan Koçal -g201210376
+Cengizhan Koçal - g201210376
 Merve Yılmaz -  b171210054
 
-DERLEME SÜRECİ:
-Proje dizinine gelip "make" komutunu çalıştırın.
+# Projeyi indirip derleme:
+1. git clone https://github.com/haxcat5/sistem-programlama-proje.git
+2. cd sistem-programlama-proje
+3. make
 
-ilerleme raporu
+# Kullanım:
+Encoding: ./kripto -e [giris_dosyasi] [cikis_dosyasi]
+Decoding: ./kripto -d [giris_dosyasi] [cikis_dosyasi]

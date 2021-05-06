@@ -16,5 +16,5 @@ clean:
 	rm -f bin/*
 
 bin/kripto: src/kripto.c 
-	$(CC) $(CFLAGS) -o bin/kripto src/kripto.c $(LIBS)
+	$(CC) -g $(CFLAGS) -o bin/kripto src/kripto.c $(LIBS)
 
