@@ -40,7 +40,7 @@ void decrypt(char **argv)
   char *buffer = 0;
   char *str = 0;
   long length;
-  FILE *f = fopen (argv[2], "rb");
+  FILE *f = fopen (".kilit", "r");
   cJSON *json;
   JRB b, tmp;
   b = make_jrb();
@@ -69,7 +69,7 @@ void decrypt(char **argv)
   }
   else
   {
-    printf("Dosya açılamıyor\n");
+    printf("Kilit dosyası açılamıyor\n");
     exit(1);
   }
 
@@ -97,10 +97,8 @@ void decrypt(char **argv)
           printf("| %s Bulunamadi |", str);
         }
         else {
-          printf("%s ", tmp->key.s);
+          fprintf(fp, "%s ", tmp->val.s);
         }
-        // printf("%s ", tmp->val.s);
-        // fprintf(fp, "%s ", tmp->val.s);
       }
     }
   }
@@ -146,7 +144,7 @@ void encrypt(char **argv)
   }
   else
   {
-    printf("Dosya açılamıyor\n");
+    printf(".kilit dosyası açılamıyor\n");
     exit(1);
   }
 
@@ -157,6 +155,9 @@ void encrypt(char **argv)
     cJSON *current_element = NULL;
     char *current_key = NULL;
 
+    if (json == NULL) {
+      printf("Gecersiz json");
+    }
     cJSON_ArrayForEach(current_element, json)
     {
         current_key = current_element->string;
