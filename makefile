@@ -7,14 +7,13 @@ CFLAGS = $(INCLUDE)
 LIBS = $(CLASSDIR)/lib/libfdr.a
 
 CC = gcc
-EXECUTABLES = \
-    bin/kripto \
+EXECUTABLES = kripto
 
 all: $(EXECUTABLES)
 
 clean:
 	rm -f bin/*
 
-bin/kripto: src/kripto.c 
-	$(CC) -g $(CFLAGS) -o bin/kripto src/kripto.c $(LIBS)
+kripto: main.c 
+	$(CC) -g $(CFLAGS) -o kripto main.c $(LIBS)
 

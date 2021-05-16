@@ -12,6 +12,5 @@ Merve Yılmaz -  b171210054
 3. make
 
 # Projenin çalıştırılması:
-1. cd bin
-2. Encoding: ./kripto -e [giris_dosyasi.txt] [cikis_dosyasi]
-3. Decoding: ./kripto -d [giris_dosyasi] [cikis_dosyasi.txt]
+1. Encoding: ./kripto -e [giris_dosyasi.txt] [cikis_dosyasi]
+2. Decoding: ./kripto -d [giris_dosyasi] [cikis_dosyasi.txt]

@@ -84,7 +84,6 @@ void decrypt(char **argv)
         current_key = current_element->string;
         if (current_key != NULL)
         {
-            printf("%s ", current_element->valuestring);
             (void) jrb_insert_str(b, strdup(current_element->valuestring), new_jval_v(current_key));
         }
     }
@@ -94,13 +93,14 @@ void decrypt(char **argv)
         // printf("%s ", str);
         tmp = jrb_find_str(b, str);
         if (tmp == NULL) {
-          printf("| %s Bulunamadi |", str);
+          printf("| %s Bulunamadi | (1000 karakter hatasi)\n", str);
         }
         else {
           fprintf(fp, "%s ", tmp->val.s);
         }
       }
     }
+    printf("***\nDecoding işlemi tamamlandı.\n***\n");
   }
 
   jettison_inputstruct(is_input);
