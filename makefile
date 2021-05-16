@@ -12,8 +12,20 @@ EXECUTABLES = kripto
 all: $(EXECUTABLES)
 
 clean:
-	rm -f bin/*
+	rm -f kripto
+
+cleanall:
+	rm -f kripto
+	rm -f decrypted.txt
+	rm -f encrypted
+	rm -f istiklal_marsi.txt
+	rm -f .kilit
 
 kripto: main.c 
 	$(CC) -g $(CFLAGS) -o kripto main.c $(LIBS)
 
+run:
+	make clean
+	make
+	./kripto -e istiklal_marsi.txt encrypted
+	./kripto -d encrypted decrypted.txt

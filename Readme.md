@@ -14,3 +14,6 @@ Merve Yılmaz -  b171210054
 # Projenin çalıştırılması:
 1. Encoding: ./kripto -e [giris_dosyasi.txt] [cikis_dosyasi]
 2. Decoding: ./kripto -d [giris_dosyasi] [cikis_dosyasi.txt]
+3. Encoding & Decoding: make run
+4. Dosyalarin temizlenmesi: clean
+5. cleanall: binary dosyalarının yanısıra .kilit ve metin belgelerini de siler
